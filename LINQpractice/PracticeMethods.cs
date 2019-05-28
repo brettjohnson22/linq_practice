@@ -32,5 +32,30 @@ namespace LINQpractice
             double finalAverage = listofAverages.Average();
             return finalAverage;
         }
+        public string OrderedFrequency(string word)
+        {
+            List<string> pairs = new List<string>();
+            List<char> letters = word.ToCharArray().ToList();
+            foreach(char letter in letters)
+            {
+                int counter = 0;
+                for(int i = 0; i < letters.Count; i++)
+                {
+                    if (letters[i] == letter)
+                    {
+                        counter++;
+                    }
+                }
+                var pair = letter + counter.ToString();
+                pairs.Add(pair.ToUpper());
+            }
+            var removedDuplicates = pairs.OrderBy(p => p.ToString()).Distinct();
+            string final = "";
+            foreach (string pair in removedDuplicates)
+            {
+                final += pair;
+            }
+            return final;
+        }
     }
 }
